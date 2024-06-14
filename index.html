@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Rock, Paper, Scissors</title>
+</head>
+
+<body>
+  <header class="header">
+    <img class="game-logo" src="./images/logo.svg" alt="Game Logo">
+
+    <div class="scoreboard">
+      <span class="score-text">Score</span>
+      <span id="score" class="score">0</span>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="game-box">
+      <div class="game-selection-panel">
+        <!-- Paper icon goes here  -->
+        <div class="icon-wrapper paper-icon-wrapper paper-icon-position">
+          <div data-name="paper" class="icon-box">
+            <img class="paper-icon" src="./images/icon-paper.svg" alt="Paper Icon">
+          </div>
+        </div>
+
+        <!-- Scissor icon goes here  -->
+        <div class="icon-wrapper scissor-icon-wrapper scissor-icon-position">
+          <div data-name="scissor" class="icon-box">
+            <img class="scissor-icon" src="./images/icon-scissor.svg" alt="Scissor Icon">
+          </div>
+        </div>
+
+        <!-- Rock icon goes here  -->
+        <div class="icon-wrapper rock-icon-wrapper rock-icon-position">
+          <div data-name="rock" class="icon-box">
+            <img class="rock-icon" src="./images/icon-rock.svg" alt="Rock Icon">
+          </div>
+        </div>
+      </div>
+
+      <div class="game-progress-panel hide">
+        <div class="user-selected-panel">
+          <span class="user-pick">You picked</span>
+        </div>
+
+        <div class="computer-selected-panel">
+          <span class="computer-pick">The house picked</span>
+          <div class="computer-selected-icon-outer-model">
+            <div class="computer-selected-icon-inner-model"></div>
+          </div>
+        </div>
+
+        <div class="result-box hide">
+          <span class="result-text"></span>
+          <button id="playAgainBtn" class="play-again-btn">Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <span id="modalShowBtn" class="rules-text">rules</span>
+
+    <div id="overlayContainer" class="overlay-container">
+      <div class="modal-box">
+        <span class="modal-rules-text">rules</span>
+
+        <img class="rules-image" src="./images/image-rules.svg" alt="Rules image">
+
+        <svg id="modalCloseBtn" class="close-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+          <path fill="#3B4262" fill-rule="evenodd"
+            d="M16.97 0l2.122 2.121-7.425 7.425 7.425 7.425-2.121 2.12-7.425-7.424-7.425 7.425L0 16.97l7.425-7.425L0 2.121 2.121 0l7.425 7.425L16.971 0z"
+            opacity=".25" />
+        </svg>
+      </div>
+    </div>
+  </main>
+
+  <!-- <footer>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </footer> -->
+  <script src="script.js"></script>
+</body>
+
+</html>

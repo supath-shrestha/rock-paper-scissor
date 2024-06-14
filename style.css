@@ -1,0 +1,504 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&display=swap');
+
+:root {
+    --scissor-gradient-start: hsl(39, 89%, 49%);
+    --scissor-gradient-stop: hsl(40, 84%, 53%);
+    --paper-gradient-start: hsl(230, 89%, 62%);
+    --paper-gradient-stop: hsl(230, 89%, 65%);
+    --rock-gradient-start: hsl(349, 71%, 52%);
+    --rock-gradient-stop: hsl(349, 70%, 56%);
+
+    --dark-text: hsl(229, 25%, 31%);
+    --score-text: hsl(229, 64%, 46%);
+    --header-outline: hsl(217, 16%, 45%);
+
+    --radial-gradient-start: hsl(214, 47%, 23%);
+    --radial-gradient-stop: hsl(237, 49%, 15%);
+
+    /* --shadow-color: rgba(57, 57, 95, 0.2); */
+    --shadow-color1: hsla(223, 34%, 26%, 0.35);
+    --shadow-color2: hsla(220, 38%, 24%, 0.35);
+    --shadow-color3: hsla(218, 35%, 23%, 0.35);
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: repeating-radial-gradient(circle at top center, var(--radial-gradient-start), var(--radial-gradient-stop));
+    font-family: "Barlow Semi Condensed", sans-serif;
+    padding:2rem;
+    min-height: 100svh;
+}
+
+.header {
+    border: 3px solid var(--header-outline);
+    border-radius: 0.35rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+
+.game-logo {
+    width: 6rem;
+}
+
+.scoreboard {
+    background-color: white;
+    border-radius: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+}
+
+.score-text {
+    color: var(--score-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.score {
+    font-size: 2.5rem;
+    color: var(--dark-text);
+    font-weight: 700;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 8.5rem;
+    min-width: 100%;
+}
+
+.game-box.game-in-progress {
+    padding-top: 5rem;
+}
+
+.game-selection-panel {
+    background: url('./images/bg-triangle.svg') no-repeat;
+    background-size: contain;
+    background-position: bottom center;
+    min-height: 150px;
+    width: 180px;
+    position: relative;
+}
+
+.icon-wrapper {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 130px;
+    width: 130px;
+}
+
+.icon-box {
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: inset 0px 5px rgb(221, 221, 228);
+    height: 100px;
+    width: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer
+}
+
+.paper-icon-wrapper {
+    background: linear-gradient(to top, var(--paper-gradient-start), var(--paper-gradient-stop));
+    box-shadow: inset 0px -6px rgba(39, 39, 131, 0.492);
+}
+
+.paper-icon-position {
+    position: absolute;
+    top: -4rem;
+    left: -4rem;
+}
+
+.scissor-icon-wrapper {
+    background: linear-gradient(to top, var(--scissor-gradient-start), var(--scissor-gradient-stop));
+    box-shadow: inset 0px -6px rgb(219, 116, 6);
+}
+
+.scissor-icon-position {
+    position: absolute;
+    top: -4rem;
+    right: -4rem;
+}
+
+.rock-icon-wrapper {
+    background: linear-gradient(to top, var(--rock-gradient-start), var(--rock-gradient-stop));
+    box-shadow: inset 0px -6px rgb(160, 45, 45);
+}
+
+.rock-icon-position {
+    position: absolute;
+    bottom: -4rem;
+    left: 1.5rem;
+}
+
+.rules-text {
+    border: 2px solid rgb(200, 197, 197);
+    border-radius: 0.35rem;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 0.5rem 2rem;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 35%;
+}
+
+.rules-text:hover {
+    background-color: white;
+    color: black;
+}
+
+.overlay-container {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.modal-box {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    justify-items: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+.modal-rules-text {
+    color: var(--dark-text);
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.close-icon {
+    cursor: pointer;
+}
+
+.close-icon:hover path {
+    fill: black;
+    opacity: 1;
+}
+
+.game-progress-panel {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+    row-gap: 3rem;
+    min-width: 100%;
+}
+
+.user-selected-panel,
+.computer-selected-panel {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-pick,
+.computer-pick {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.computer-selected-icon-outer-model {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 130px;
+    width: 130px;
+}
+
+.computer-selected-icon-inner-model {
+    background-color: rgba(0, 0, 0, 0.215);
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.game-progress-panel .paper-icon-wrapper.winner {
+    box-shadow: inset 0px -6px rgba(39, 39, 131, 0.492),
+        0 0 0 20px var(--shadow-color1),
+        0 0 0 45px var(--shadow-color2),
+        0 0 0 80px var(--shadow-color3);
+    z-index: -1;
+}
+
+
+.game-progress-panel .scissor-icon-wrapper.winner {
+    box-shadow: inset 0px -6px rgb(219, 116, 6),
+        0 0 0 20px var(--shadow-color1),
+        0 0 0 45px var(--shadow-color2),
+        0 0 0 80px var(--shadow-color3);
+    z-index: -1;
+}
+
+.game-progress-panel .rock-icon-wrapper.winner {
+    box-shadow: inset 0px -6px rgb(160, 45, 45),
+        0 0 0 20px var(--shadow-color1),
+        0 0 0 45px var(--shadow-color2),
+        0 0 0 80px var(--shadow-color3);
+    z-index: -1;
+}
+
+
+.result-box {
+    grid-area: 2/1/3/3;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.result-text {
+    color: white;
+    font-size: 3rem;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+.play-again-btn {
+    background-color: white;
+    border: none;
+    border-radius: 0.5rem;
+    color: var(--dark-text);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    padding: 0.75rem 3rem;
+}
+
+.play-again-btn:hover {
+    color: var(--rock-gradient-start);
+}
+
+.hide {
+    display: none;
+}
+
+
+@media screen and (min-width:1280px) {
+    body {
+        padding: 3rem 28rem;
+    }
+
+    .header {
+        border-radius: 1rem;
+    }
+
+    .game-logo {
+        width: fit-content;
+    }
+
+    .scoreboard {
+        padding: 1rem 2.5rem;
+    }
+
+    .score {
+        font-size: 3rem;
+    }
+
+    .game-box.game-in-progress {
+        padding-top: 6rem;
+    }
+
+    .game-box.game-finished {
+        width: 135%;
+    }
+
+    .game-selection-panel {
+        min-width: 250px;
+        min-height: 220px;
+    }
+
+    .icon-wrapper {
+        height: 160px;
+        width: 160px;
+    }
+
+    .icon-wrapper.selected {
+        height: 250px;
+        width: 250px;
+    }
+
+    .icon-box {
+        height: 120px;
+        width: 120px;
+    }
+
+    .icon-box.selected {
+        height: 180px;
+        width: 180px;
+    }
+
+    .rock-icon-wrapper {
+        left: 3rem;
+    }
+
+    .rules-text {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+    }
+
+    .overlay-container {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-box {
+        background-color: white;
+        border-radius: 0.5rem;
+        grid-template-rows: repeat(2, auto);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        padding: 2rem;
+        min-height: 50%;
+        width: 25%;
+    }
+
+    .modal-rules-text {
+        grid-area: 1/1/2/2;
+        justify-self: flex-start;
+    }
+
+    .rules-image {
+        grid-area: 2/1/3/3;
+    }
+
+    .close-icon {
+        grid-area: 1/2/2/3;
+        justify-self: flex-end;
+    }
+
+    .game-progress-panel {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        justify-content: center;
+    }
+
+    .game-progress-panel:has(.result-box.hide) {
+        grid-template-columns: repeat(2, auto);
+        column-gap: 5rem;
+    }
+
+    .user-selected-panel,
+    .computer-selected-panel {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .game-progress-panel .icon {
+        width: 5rem;
+    }
+
+    .game-progress-panel .icon-box {
+        box-shadow: inset 0px 8px rgb(221, 221, 228);
+
+    }
+
+    .game-progress-panel .paper-icon-wrapper {
+        box-shadow: inset 0px -10px rgba(39, 39, 131, 0.492);
+    }
+
+    .game-progress-panel .paper-icon-wrapper.winner {
+        box-shadow: inset 0px -10px rgba(39, 39, 131, 0.492),
+            0 0 0 50px var(--shadow-color1),
+            0 0 0 110px var(--shadow-color2),
+            0 0 0 180px var(--shadow-color3);
+        z-index: -1;
+    }
+
+    .game-progress-panel .scissor-icon-wrapper {
+        box-shadow: inset 0px -10px rgb(219, 116, 6);
+    }
+
+    .game-progress-panel .scissor-icon-wrapper.winner {
+        box-shadow: inset 0px -10px rgb(219, 116, 6),
+            0 0 0 50px var(--shadow-color1),
+            0 0 0 110px var(--shadow-color2),
+            0 0 0 180px var(--shadow-color3);
+        z-index: -1;
+    }
+
+    .game-progress-panel .rock-icon-wrapper {
+        box-shadow: inset 0px -10px rgb(160, 45, 45);
+    }
+
+    .game-progress-panel .rock-icon-wrapper.winner {
+        box-shadow: inset 0px -10px rgb(160, 45, 45),
+            0 0 0 50px var(--shadow-color1),
+            0 0 0 110px var(--shadow-color2),
+            0 0 0 180px var(--shadow-color3);
+        z-index: -1;
+    }
+
+    .user-pick,
+    .computer-pick {
+        font-size: 1.25rem;
+    }
+
+    .computer-selected-icon-outer-model {
+        height: 250px;
+        width: 250px;
+    }
+
+    .computer-selected-icon-inner-model {
+        height: 180px;
+        width: 180px;
+    }
+
+    .result-box {
+        align-self: center;
+        grid-area: 1/2/2/3;
+    }
+}
+
+.attribution {
+    font-size: 11px;
+    text-align: center;
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%);
+}
